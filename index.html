@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Awesome Tip Calculator</title>
+	
+	<meta name="viewport" content="initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+
+
+	<link rel="stylesheet"  href="css/bootstrap.min.css">
+	<link rel="stylesheet"  href="css/font-awesome/css/font-awesome.min.css">
+	
+  	
+  	<script src="js/jquery.min.js"></script>
+  	<script src="js/bootstrap.min.js"></script>
+  	<script src="js/awesome-functions.js"></script>
+
+
+  	<style type="text/css">
+	
+	.LinkCSS{
+		text-decoration: none;
+		color:white;
+	}
+	.amounts {
+    text-align: center;
+	}
+	.amounts label {
+	    display: inline-block;
+	    min-width: 150px;
+	}
+
+	.totals {
+	    color: #080;
+	}
+	</style>
+	
+	<script type="text/javascript">
+	
+	$( document ).on( "ready", function() 
+	{
+		//Local storage table name
+		var TDefaultTip = "lsFastTipCalc";
+
+		//Load tip calc screen
+		CalcScreen();
+
+		function CalcScreen()
+		{
+			var GetDefaultTipAmt = ls.Get(TDefaultTip);
+
+			if(GetDefaultTipAmt)
+			{
+				$('.TipAmt').val(GetDefaultTipAmt);		
+			}
+		
+			$('.Screen').hide();
+			$('.Screen_Home').show();
+
+		}
+
+
+		function UserTipSaved()
+		{
+			var GetDefaultTipAmt = ls.Get(TDefaultTip);
+
+			if(GetDefaultTipAmt)
+			{
+				$('.DefaultTipAmt').val(GetDefaultTipAmt);		
+			}
+			$('.Screen').hide();
+			$('.Screen_Settings').show();
+
+			//$('.ScreenData').html(strDiv);
+		}
+
+
+
+		$(document).on('click', '.Menu_Home', function(event) {
+			event.preventDefault();
+			/* Act on the event */
+			CalcScreen();
+		});
+
+		$(document).on('click', '.Menu_Setting', function(event) {
+			event.preventDefault();
+			/* Act on the event */
+			UserTipSaved();
+		});
+
+
+		$(document).on('click', '.BtnSaveDefaultTipAmt', function(event) {
+			event.preventDefault();
+			/* Act on the event */
+
+			var GetDefaultTipAmt = Number( $('.DefaultTipAmt').val() );
+
+			if(GetDefaultTipAmt)
+			{
+				ls.Add (TDefaultTip,GetDefaultTipAmt);
+
+				var Msg = bs.AlertMsg("Your tip % is saved to : " + GetDefaultTipAmt ,'success');
+
+				$('.TipSavedMsg').html(Msg);
+
+				$('.TipSavedMsg').delay(2000).fadeOut(40, function(){
+					//Do anything after 1 second
+					$('.FinalBill').hide();
+					CalcScreen();
+				});
+
+			}
+
+		});
+
+		$(document).on('click', '.BtnCalcTip', function(event) 
+		{
+			event.preventDefault();
+			bs.ClearError();
+			
+			//Get values
+			var TipPercent = $('.TipAmt').val()/100;
+			var BillAmt = Number($('.BillAmt').val());
+			var PartySize = Number($('.PartySize').val());
+
+
+			if(!BillAmt)
+			{
+				$('.Alert_Home').html( bs.AlertMsg ("Please Enter Your Bill Amount",'error'));
+				return false; 
+			}
+			//Calc
+			var TotalTipAmt =  BillAmt * TipPercent ;
+			var TotalBillAmt = BillAmt + TotalTipAmt;
+			
+			var TipPerPerson = TotalTipAmt / PartySize; 
+			var TotalBillPerPerson = TotalBillAmt / PartySize; 
+
+			$('.TipPerPerson').text('$' + TipPerPerson.toFixed(2));
+			$('.TotalBillPerPerson').text('$' + TotalBillPerPerson.toFixed(2));
+
+
+			$('.TipAmtCalc').text('$' + TotalTipAmt.toFixed(2));
+			$('.TotalBillAmt').text('$' + TotalBillAmt.toFixed(2));
+
+			$('.FinalBill').show();
+
+		});
+
+		//
+		$(document).on('click', '.BtnReset', function(event) 
+		{
+			$('.FinalBill').hide();
+
+			$('.BillAmt').val('');
+			$('.TipPerPerson').text('$0.00');
+			$('.TotalBillPerPerson').text('$0.00');
+
+			$('.TipAmtCalc').text('$0.00');
+			$('.TotalBillAmt').text('$0.00');
+		});
+
+
+	});
+
+	</script>
+   
+
+    
+
+</head>
+<body>
+
+<!--[Menu - Start]-->
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse1 navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header text-center" style="padding:5px;">
+				<img alt="Brand" src="awesome-tip-calculator.jpg" width="40px" height="40px">
+                <div class="fa fa-2x LinkCSS1">Awesome Tip Calculator</div>
+                
+            </div>
+
+  
+        </div>
+
+        <!-- /.container -->
+    </nav>
+<!--[Menu - End]-->
+
+<div style="padding:20px;"></div>
+
+
+<!--[Screen Ad - Start]-->
+
+<div class="Screen_Ad" style="padding:5px;">
+
+
+<script type="text/javascript">
+	function adSetter(){
+alert(navigator.userAgent);
+var admobid = {};
+// select the right Ad Id according to platform
+if( /(android)/i.test(navigator.userAgent) ) { 
+    admobid = { // for Android
+        banner: 'ca-app-pub-7228106559462972/5298352719',
+        interstitial: 'ca-app-pub-7228106559462972/5298352719'
+    };
+} else if(/(ipod|iphone|ipad)/i.test(navigator.userAgent)) {
+    admobid = { // for iOS
+        banner: 'ca-app-pub-7228106559462972/5298352719',
+        interstitial: 'ca-app-pub-7228106559462972/5298352719'
+    };
+} else {
+    admobid = { // for Windows Phone
+        banner: 'ca-app-pub-7228106559462972/5298352719',
+        interstitial: 'ca-app-pub-7228106559462972/5298352719'
+    };
+}
+ 
+if(AdMob) AdMob.createBanner( {
+    adId:admobid.banner, 
+    position:AdMob.AD_POSITION.BOTTOM_CENTER, 
+    autoShow:true} );
+ 
+}
+ 
+    function onDeviceReady(){
+     alert("device ready");
+      adSetter();
+  }
+ 
+  document.addEventListener("deviceready", onDeviceReady, false);
+</script>
+
+</div>
+
+<!--[Screen Ad - End]-->
+
+
+<div style="padding:1px;"></div>
+
+
+
+
+
+
+<!--[Home - Start]-->
+<div class="Screen Screen_Home" style="padding:10px;display:none;">
+
+	<div class="Alert_Home"></div> 
+
+	<form class="form-group form-inline">
+	  <div class="input-group">
+	     <div class="input-group-addon">Bill Amount $</div>
+	     <input type="tel"  class="form-control BillAmt" placeholder="150.58" value="">
+	  </div>
+	</form>
+
+	<form class="form-group form-inline">
+	  <div class="input-group">
+	     <div class="input-group-addon">Party Size</div>
+	     <input type="tel" class="form-control PartySize" placeholder="2" value="2">
+	  </div>
+	</form>
+
+	<form class="form-group form-inline">
+	  <div class="input-group">
+	     <div class="input-group-addon">Tip %</div>
+	     <input type="tel" class="form-control TipAmt" placeholder="8" value="">
+	  </div>
+	</form>
+
+
+	<button type="button"  class="btn btn-success BtnCalcTip" > Calculate Tip </button>
+	<button type="button"  class="btn BtnReset pull-right" > Reset </button>
+	<br><br>
+
+
+    <div class="panel panel-primary FinalBill" style="display:none;">
+      
+    	<div class="panel-body">
+
+			<p class="amounts">
+				<label>Tip Per Person</label>
+				<span class="TipPerPerson">$0.00</span>
+			</p>
+				
+			<p class="amounts totals">
+				<label>Total Per Person</label>
+				<span class="TotalBillPerPerson">$0.00</span>
+			</p>
+			<hr>
+
+
+			<p class="amounts">
+				<label>Total Tip</label>
+				<span class="TipAmtCalc">$0.00</span>
+			</p>
+
+		</div>
+		<div class="panel-footer panel-primary">
+			
+			<p class="amounts totals">
+				<label>Total To Pay</label>
+				<span class="TotalBillAmt">$0.00</span>
+			</p>
+
+		</div>
+    </div>
+
+</div>
+<!--[Home - End]-->
+
+<!--[Setting - Start]-->
+<div class="Screen Screen_Settings" style="padding:10px;display:none;">
+   <div class="pull-center text-center" style="font-size:25px;">Setting</div>
+   <br>
+   <div class="TipSavedMsg"></div>
+   
+   <p>Set your default tip amount below</p>
+   <form class="form-group form-inline">
+      <div class="input-group">
+         <div class="input-group-addon">Your Tip %</div>
+         <input type="tel"  class="form-control DefaultTipAmt" placeholder="8" value="">
+      </div>
+   </form>
+   <button type="button"  class="BtnSaveDefaultTipAmt pull-left btn btn-success" > Save </button>
+   
+</div>
+<!--[Setting - End]-->
+
+
+
+<!--[Footer Menu - Start]-->
+
+<div class="navbar-brand navbar navbar-inverse navbar-fixed-bottom" style="padding:5px;" >
+  
+	<div class="LinkCSS pull-left Menu_Home  " >
+		<i class="fa fa-1x fa-home" style="font-size:25px;"></i>
+		<br>
+		<small>Home</small>
+		 
+	</div>
+	
+	<div  class="LinkCSS pull-right Menu_Setting ">		
+		<i class="fa fa-2x fa-cog pull-center" style="font-size:25px;align:center"></i>
+		<br>
+		<small>Setting</small>
+		
+	</div>
+
+</div>
+<!--[Footer Menu - End]-->
+
+
+</body>
+</html>

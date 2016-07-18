@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "org.awesome.TipCalculator-Test"
+        versionCode="1" 
+        version   = "16.07.10">
+
+    <name>Awesome Tip Calculator - Test</name>
+
+    <description>
+    	Awesome Tip Calculator application
+    </description>
+
+    <author href="http://codewithmark.com" email="mark2kumar@gmail.com">
+        Mark Kumar 
+    </author>
+		
+	<!-- For more information about using config.xml, see
+		https://build.phonegap.com/docs/config-xml -->
+
+	<!-- this app will have no device api access -->
+    <feature name="http://api.phonegap.com/1.0/device" />
+    <preference name="orientation" value="portrait" />
+    <preference name="fullscreen" value="false" />
+    <preference name="target-device" value="universal" />
+    <preference name="ios-statusbarstyle" value="black-opaque" />
+    <preference name="android-installLocation" value="auto" />
+
+	<!--[Google mobile add]-->
+	
+	
+	
+	<!-- the default icon to be use, for BlackBerry must be less than 16kb -->
+	<icon src="phonegap_icon_template.png" />
+
+	<!-- the default splash screen to use -->
+	<!-- iOS -->
+	<gap:splash src="phonegap_splash_template.png" width="320" height="480" />
+	<gap:splash src="phonegap_splash_template.png" width="640" height="960" />
+	<gap:splash src="phonegap_splash_template.png" width="1024" height="768" />
+	<gap:splash src="phonegap_splash_template.png" width="768" height="1024" />
+	<!-- Android -->
+	<gap:splash src="phonegap_splash_template.png" gap:platform="android" gap:density="ldpi" />
+	<gap:splash src="phonegap_splash_template.png" gap:platform="android" gap:density="mdpi" />
+	<gap:splash src="phonegap_splash_template.png" gap:platform="android" gap:density="hdpi" />
+	<gap:splash src="phonegap_splash_template.png" gap:platform="android" gap:density="xhdpi" />
+	<!-- BlackBerry -->
+	<gap:splash src="phonegap_splash_template.png" gap:platform="blackberry" />
+	<!-- Windows Phone -->
+	<gap:splash src="phonegap_splash_template.jpg" gap:platform="winphone" />
+
+
+</widget>
